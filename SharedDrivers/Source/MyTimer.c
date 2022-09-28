@@ -45,7 +45,72 @@ void MyTimer_ActiveIT(TIM_TypeDef * Timer , char Prio, void (*IT_function)(void)
 }
 
 void MyTimer_PWM(TIM_TypeDef *Timer, char Channel) {
-	
+	switch(Channel) {
+		case 1:
+			Timer->CCER |= (0x1 << 0); // Enable output
+			Timer->CCER &= ~(0x1 << 1); // Set output polarity to active high
+			Timer->CCER |= (0x1 << 2); // Enable complementary output
+			Timer->CCMR1 &= ~(0x3);		// CC1S to output
+			Timer->CCMR1 = (Timer->CCMR1 & ~(0x7 << 4)) | (0x6 << 4); // Set PWM Mode 1
+			
+			Timer->EGR |= (0x1 << 0); 
+			break;
+		case 2:
+			Timer->CCER |= (0x1 << 4); // Enable output
+			Timer->CCER &= ~(0x1 << 5); // Set output polarity to active high
+			Timer->CCER |= (0x1 << 6); // Enable complementary output
+			Timer->CCMR1 &= ~(0x3 << 8);		// CC1S to output
+			Timer->CCMR1 = (Timer->CCMR1 & ~(0x7 << 12)) | (0x6 << 12);
+		
+			Timer->EGR |= (0x1 << 0);
+			break;
+		case 3:
+			Timer->CCER |= (0x1 << 8); // Enable output
+			Timer->CCER &= ~(0x1 << 9); // Set output polarity to active high
+			Timer->CCER |= (0x1 << 10); // Enable complementary output
+			Timer->CCMR2 &= ~(0x3);		// CC1S to output
+			Timer->CCMR2 = (Timer->CCMR1 & ~(0x7 << 4)) | (0x6 << 4);
+		
+			Timer->EGR |= (0x1 << 0);
+			break;
+		case 4:
+			Timer->CCER |= (0x1 << 12); // Enable output
+			Timer->CCER &= ~(0x1 << 13); // Set output polarity to active high
+			Timer->CCER |= (0x1 << 14); // Enable complementary output
+			Timer->CCMR2 &= ~(0x3 << 8);		// CC1S to output
+			Timer->CCMR2 = (Timer->CCMR1 & ~(0x7 << 12)) | (0x6 << 12);
+		
+			Timer->EGR |= (0x1 << 0);
+			break;
+		default:
+			return;
+	}
+	if(Timer == TIM1) {
+		Timer->BDTR |= (0x1 << 15); // MOE
+		// Timer->BDTR |= (0x1 << 11); // OSSR 
+		
+	}
+}
+
+void MyTimer_PWM_Set_Duty_Cycle(TIM_TypeDef *Timer, char Channel, float DutyCycle) {
+	int Tpwm = Timer->ARR+1;
+	int Th = (int)(Tpwm*DutyCycle);
+	switch(Channel) {
+		case 1:
+			Timer->CCR1 = Th;
+			return;
+		case 2:
+			Timer->CCR2 = Th;
+			return;
+		case 3:
+			Timer->CCR3 = Th;
+			return;
+		case 4:
+			Timer->CCR4 = Th;
+			return;
+		default:
+			return;
+	}
 }
 
 void TIM1_UP_IRQHandler(void) {
