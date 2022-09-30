@@ -2,63 +2,24 @@
 #include "Driver_GPIO.h"
 #include "stm32f10x.h"
 
+char modecnf[8] = {0x4,0x8,0x8,0x0,0x2,0x6,0xa,0xe};
+
 void MyGPIO_Init (MyGPIO_Struct_TypeDef * GPIOStructPtr) {
-	int mode;
-	int cnf;
 	
 	if(GPIOStructPtr->GPIO==GPIOA){
 		RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 	} else if(GPIOStructPtr->GPIO==GPIOB){
-		RCC->APB2ENR |= (0x01 << 3);
+		RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
 	} else if(GPIOStructPtr->GPIO==GPIOC){ 
-		RCC->APB2ENR |= (0x01 << 4);
+		RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
 	} else if(GPIOStructPtr->GPIO==GPIOD){ 
-		RCC->APB2ENR |= (0x01 << 5);
-	}
-	
-	switch (GPIOStructPtr->GPIO_Conf) { 		// Enable relevant clock for GPIO
-		case In_Floating: 
-			mode = 0;
-			cnf = 1;
-			break;
-		case In_PullDown: 	
-			mode = 0;
-			cnf = 2;
-			break;
-		case In_PullUp: 	
-			mode = 0;
-			cnf = 2;
-			break;			
-		case In_Analog: 		
-			mode = 0;
-			cnf = 0;
-			break;
-		case Out_Ppull: 
-			mode = 2;
-			cnf = 0;
-			break;			
-		case Out_OD: 		
-			mode = 2;
-			cnf = 1;
-			break;			
-		case AltOut_Ppull: 	
-			mode = 2;
-			cnf = 2;
-			break;
-		case AltOut_OD: 
-			mode = 2;
-			cnf = 3;
-			break;			
-		default: 
-			break;
+		RCC->APB2ENR |= RCC_APB2ENR_IOPDEN;
 	}
 	
 	if(GPIOStructPtr->GPIO_Pin < 8) {
-		GPIOStructPtr->GPIO->CRL = (GPIOStructPtr->GPIO->CRL & ~(0x3 << 4*GPIOStructPtr->GPIO_Pin)) | (mode << 4*GPIOStructPtr->GPIO_Pin);
-		GPIOStructPtr->GPIO->CRL = (GPIOStructPtr->GPIO->CRL & ~(0x3 << 4*GPIOStructPtr->GPIO_Pin+2)) | (cnf << 4*GPIOStructPtr->GPIO_Pin+2);
+		GPIOStructPtr->GPIO->CRL = (GPIOStructPtr->GPIO->CRL & ~(0xf << 4*GPIOStructPtr->GPIO_Pin)) | (modecnf[GPIOStructPtr->GPIO_Conf] << 4*GPIOStructPtr->GPIO_Pin);
 	} else {
-		GPIOStructPtr->GPIO->CRH = (GPIOStructPtr->GPIO->CRH & ~(0x3 << 4*(GPIOStructPtr->GPIO_Pin-8))) | (mode << 4*(GPIOStructPtr->GPIO_Pin-8)); 
-		GPIOStructPtr->GPIO->CRH = (GPIOStructPtr->GPIO->CRH & ~(0x3 << 4*(GPIOStructPtr->GPIO_Pin-8)+2)) | (cnf << 4*(GPIOStructPtr->GPIO_Pin-8)+2); 
+		GPIOStructPtr->GPIO->CRH = (GPIOStructPtr->GPIO->CRH & ~(0xf << 4*(GPIOStructPtr->GPIO_Pin-8))) | (modecnf[GPIOStructPtr->GPIO_Conf] << 4*(GPIOStructPtr->GPIO_Pin-8)); 
 	}
 	
 	if(GPIOStructPtr->GPIO_Conf == In_PullDown) {
