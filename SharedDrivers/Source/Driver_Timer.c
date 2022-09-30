@@ -1,8 +1,8 @@
-#include "MyTimer.h"
+#include "Driver_Timer.h"
 
 void (*IRQHandlerPointer) (void) ;
 
-void MyTimer_Base_Init(MyTimer_Struct_TypeDef * Timer) {
+void Timer_Init(Timer_Struct_TypeDef * Timer) {
 	
 	if (Timer->Timer == TIM1) {
 		RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;	
@@ -18,7 +18,7 @@ void MyTimer_Base_Init(MyTimer_Struct_TypeDef * Timer) {
 	Timer->Timer->ARR = Timer->ARR;
 }
 
-void MyTimer_ActiveIT(TIM_TypeDef * Timer , char Prio, void (*IT_function)(void)) {
+void Timer_ActiveIT(TIM_TypeDef * Timer , char Prio, void (*IT_function)(void)) {
 	char IRQn;
 	
 	IRQHandlerPointer = IT_function;
@@ -44,7 +44,7 @@ void MyTimer_ActiveIT(TIM_TypeDef * Timer , char Prio, void (*IT_function)(void)
 	//NVIC_EnableIRQ(IRQn);
 }
 
-void MyTimer_PWM(TIM_TypeDef *Timer, char Channel) {
+void Timer_PWM(TIM_TypeDef *Timer, char Channel) {
 	switch(Channel) {
 		case 1:
 			Timer->CCER |= (0x1 << 0); // Enable output
@@ -92,7 +92,7 @@ void MyTimer_PWM(TIM_TypeDef *Timer, char Channel) {
 	}
 }
 
-void MyTimer_PWM_Set_Duty_Cycle(TIM_TypeDef *Timer, char Channel, float DutyCycle) {
+void Timer_PWM_Set_Duty_Cycle(TIM_TypeDef *Timer, char Channel, float DutyCycle) {
 	int Tpwm = Timer->ARR+1;
 	int Th = (int)(Tpwm*DutyCycle);
 	switch(Channel) {

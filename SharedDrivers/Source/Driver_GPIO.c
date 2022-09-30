@@ -4,7 +4,7 @@
 
 char modecnf[8] = {0x4,0x8,0x8,0x0,0x2,0x6,0xa,0xe};
 
-void MyGPIO_Init (MyGPIO_Struct_TypeDef * GPIOStructPtr) {
+void GPIO_Init(GPIO_Struct_TypeDef * GPIOStructPtr) {
 	
 	if(GPIOStructPtr->GPIO==GPIOA){
 		RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;

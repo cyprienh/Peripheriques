@@ -399,9 +399,9 @@
               <FilePath>..\SharedDrivers\Source\Driver_GPIO.c</FilePath>
             </File>
             <File>
-              <FileName>MyTimer.c</FileName>
+              <FileName>Driver_Timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SharedDrivers\Source\MyTimer.c</FilePath>
+              <FilePath>U:\Documents\4A-Peripheriques-S1\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -806,9 +806,9 @@
               <FilePath>..\SharedDrivers\Source\Driver_GPIO.c</FilePath>
             </File>
             <File>
-              <FileName>MyTimer.c</FileName>
+              <FileName>Driver_Timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SharedDrivers\Source\MyTimer.c</FilePath>
+              <FilePath>U:\Documents\4A-Peripheriques-S1\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
           </Files>
         </Group>

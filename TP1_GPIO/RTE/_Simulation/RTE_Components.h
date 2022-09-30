@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'Driver_Test' 
+ * Project: 'TP1_GPIO' 
  * Target:  'Simulation' 
  */
 

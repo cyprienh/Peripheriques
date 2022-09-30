@@ -1,5 +1,5 @@
-#ifndef MYTIMER_H
-#define MYTIMER_H
+#ifndef DRIVER_TIMER_H
+#define DRIVER_TIMER_H
 
 #include "stm32f10x.h"
 
@@ -7,7 +7,7 @@ typedef struct {
 	TIM_TypeDef * Timer ; // TIM1 à TIM4
 	unsigned short ARR ;
 	unsigned short PSC ;
-} MyTimer_Struct_TypeDef ;
+} Timer_Struct_TypeDef ;
 
 
 /*
@@ -20,12 +20,12 @@ conf plus fines (PWM, codeur inc... )
 *************************************************************************************************
 */
 
-void MyTimer_Base_Init(MyTimer_Struct_TypeDef * Timer);
-void MyTimer_ActiveIT(TIM_TypeDef * Timer , char Prio, void (*IT_function)(void));
-void MyTimer_PWM(TIM_TypeDef *Timer, char Channel);
-void MyTimer_PWM_Set_Duty_Cycle(TIM_TypeDef *Timer, char Channel, float DutyCycle);
+void Timer_Init(Timer_Struct_TypeDef * Timer);
+void Timer_ActiveIT(TIM_TypeDef * Timer , char Prio, void (*IT_function)(void));
+void Timer_PWM(TIM_TypeDef *Timer, char Channel);
+void Timer_PWM_Set_Duty_Cycle(TIM_TypeDef *Timer, char Channel, float DutyCycle);
 
-#define MyTimer_Base_Start(Timer) (Timer->CR1 |= 0x1)
-#define MyTimer_Base_Stop(Timer) (Timer->CR1 &= ~0x1)
+#define Timer_Start(Timer) (Timer->CR1 |= 0x1)
+#define Timer_Stop(Timer) (Timer->CR1 &= ~0x1)
 
 #endif
