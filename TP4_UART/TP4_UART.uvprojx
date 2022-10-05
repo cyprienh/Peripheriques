@@ -408,6 +408,16 @@
               <FileType>1</FileType>
               <FilePath>U:\Documents\4A-Peripheriques-S1\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
+            <File>
+              <FileName>Driver_UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SharedDrivers\Source\Driver_UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_STD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>\\netapp2\heusse\Documents\4A-Peripheriques-S1\SharedDrivers\Source\Driver_STD.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -822,6 +832,16 @@
               <FileName>Driver_Timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>U:\Documents\4A-Peripheriques-S1\SharedDrivers\Source\Driver_Timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SharedDrivers\Source\Driver_UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_STD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>\\netapp2\heusse\Documents\4A-Peripheriques-S1\SharedDrivers\Source\Driver_STD.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'TP3_ADC' 
+ * Project: 'TP4_UART' 
  * Target:  'Réel' 
  */
 

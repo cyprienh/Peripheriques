@@ -2,20 +2,26 @@
 #include "Driver_GPIO.h"
 #include "Driver_ADC.h"
 #include "Driver_Timer.h"
+#include "Driver_UART.h"
+#include "Driver_STD.h"
 #include "stm32f10x.h"
 
 int main (void) {
-	USART1->CR1 |= (0x1 << 12); 	// Set word length to 9 bits
-	USART1->CR1 |= (0x1 << 10);		// Enable parity control
-	USART1->CR1 &= ~(0x1 << 9);		// Set to even parity
+	GPIO_Struct_TypeDef GPIO_StructA0;
+	char message[MAX_STRING_LENGTH];
 	
-	USART1->CR1 |= (0x1 << 3); 		// Enable transmitter
-	USART1->CR2 |= (0x3 << 12); 	// 1 Stop bit
-	USART1->CR2 &= ~(0x1 << 11);		// CLK Disable
+	GPIO_StructA0.GPIO=GPIOA;
+	GPIO_StructA0.GPIO_Pin=0;
+	GPIO_StructA0.GPIO_Conf=Out_Ppull;
+	GPIO_Init(&GPIO_StructA0);
 	
-	
+	//UART_Init_TX(USART2);
+	//UART_Print(USART2, message);
 	
 	do {
+		UART_Init_RX(USART2);
+		UART_Read(USART2, message);
+		UART_Init_TX(USART2);
+		UART_Print(USART2, message);
 	} while (1);
-	
 }
