@@ -3,8 +3,8 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'F1_Bordage' 
- * Target:  'Réel' 
+ * Project: 'Template' 
+ * Target:  'Target 1' 
  */
 
 #ifndef RTE_COMPONENTS_H

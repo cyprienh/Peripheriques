@@ -3,8 +3,8 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'Orientation_Voilier' 
- * Target:  'Réel' 
+ * Project: 'Transmission' 
+ * Target:  'Simulation' 
  */
 
 #ifndef RTE_COMPONENTS_H
