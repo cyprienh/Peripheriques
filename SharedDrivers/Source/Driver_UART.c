@@ -79,9 +79,16 @@ void UART_Print(USART_TypeDef * USART, char * str) {
 }
 
 char UART_ReadChar(USART_TypeDef * USART) {
+	
 	while (((USART->SR >> 5) & 0x1) != 1);
 	return USART->DR;
 }
+
+/*
+char UART_ReadByte(USART_TypeDef * USART) {
+	return USART->DR;
+}
+*/
 
 void UART_Read(USART_TypeDef * USART, char* message) {
 	char fin = 0;

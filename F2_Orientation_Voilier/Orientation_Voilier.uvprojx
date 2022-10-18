@@ -418,6 +418,11 @@
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
+            <File>
+              <FileName>Orientation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Orientation.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -842,6 +847,11 @@
               <FileName>Driver_Timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Orientation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Orientation.c</FilePath>
             </File>
           </Files>
         </Group>
