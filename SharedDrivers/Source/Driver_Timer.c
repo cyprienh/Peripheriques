@@ -1,4 +1,5 @@
 #include "Driver_Timer.h"
+#include "Driver_GPIO.h"
 
 void (*IRQHandlerPointer) (void) ;
 
@@ -111,6 +112,44 @@ void Timer_PWM_Set_Duty_Cycle(TIM_TypeDef *Timer, char Channel, float DutyCycle)
 		default:
 			return;
 	}
+}
+
+void Bordage_Incremental() {
+	GPIO_Struct_TypeDef GPIO_StructTI1;
+	GPIO_Struct_TypeDef GPIO_StructTI2;
+	
+	GPIO_StructTI1.GPIO=GPIOA;
+	GPIO_StructTI1.GPIO_Pin=8;
+	GPIO_StructTI1.GPIO_Conf=In_PullDown;
+	GPIO_Init(&GPIO_StructTI1);
+	
+	GPIO_StructTI2.GPIO=GPIOA;
+	GPIO_StructTI2.GPIO_Pin=9;
+	GPIO_StructTI2.GPIO_Conf=In_PullDown;
+	GPIO_Init(&GPIO_StructTI2);
+	
+	RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;		// Start TIM1 CLK
+	
+	TIM1->CCMR1 = (TIM1->CCMR1 & ~(0x3 << 0)) | (0x1 << 0);		// TIFP1 <- TI1
+	TIM1->CCMR1 = (TIM1->CCMR1 & ~(0x3 << 8)) | (0x1 << 8);		// TIFP2 <- TI2
+	
+	TIM1->CCER &= ~(0x1 << 1);		// TI1FP1 non-inverted, TI1FP1=TI1
+	TIM1->CCMR1 &= ~(0xF << 4);
+	TIM1->CCER |= (0x1 << 0);
+	
+	TIM1->CCER &= ~(0x1 << 5);		// TI1FP2 non-inverted, TI1FP2=TI2
+	TIM1->CCMR1 &= ~(0xF << 12);
+	TIM1->CCER |= (0x1 << 4);
+	
+	TIM1->SMCR = (TIM1->SMCR & ~(0x7 << 0)) | (0x3 << 0);	// Both input active & rising + falling edge
+	
+	TIM1->ARR = 1440;			// 360*4
+	
+	TIM1->CR1 |= (0x1 << 0);			// Counter enable
+}
+
+float Bordage_Get_Angle() {
+	return TIM1->CNT / 4.0;
 }
 
 void TIM1_UP_IRQHandler(void) {
