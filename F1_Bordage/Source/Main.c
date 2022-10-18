@@ -34,11 +34,11 @@ int main (void) {
 	
 	//Timer_ActiveIT(TIM1,10,&(test));
 	
-	Timer_Incremental();
+	Bordage_Incremental();
 	// 45 -> 0
 	// 180 -> 90
 	do {
-		Bordage_a = Timer_Get_Angle() - 180.0;
+		Bordage_a = Bordage_Get_Angle() - 180.0;
 		if(Bordage_a > 45.0 && Bordage_a < 180.0) {
 			Bordage_Commande = (2.0*Bordage_a)/3.0-30.0;
 		} else if(Bordage_a < -45.0 && Bordage_a > -180.0) {

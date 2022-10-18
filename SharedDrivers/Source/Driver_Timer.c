@@ -114,7 +114,7 @@ void Timer_PWM_Set_Duty_Cycle(TIM_TypeDef *Timer, char Channel, float DutyCycle)
 	}
 }
 
-void Timer_Incremental() {
+void Bordage_Incremental() {
 	GPIO_Struct_TypeDef GPIO_StructTI1;
 	GPIO_Struct_TypeDef GPIO_StructTI2;
 	
@@ -148,7 +148,7 @@ void Timer_Incremental() {
 	TIM1->CR1 |= (0x1 << 0);			// Counter enable
 }
 
-float Timer_Get_Angle() {
+float Bordage_Get_Angle() {
 	return TIM1->CNT / 4.0;
 }
 

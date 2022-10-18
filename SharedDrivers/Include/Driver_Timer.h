@@ -25,8 +25,10 @@ void Timer_ActiveIT(TIM_TypeDef * Timer , char Prio, void (*IT_function)(void));
 void Timer_PWM(TIM_TypeDef *Timer, char Channel);
 void Timer_PWM_Set_Duty_Cycle(TIM_TypeDef *Timer, char Channel, float DutyCycle);
 
-void Timer_Incremental();
-float Timer_Get_Angle();
+// F1 - Bordage
+void Bordage_Calibration();					// EN TOUT PREMIER -> INTERRUPT HANDLER
+void Bordage_Incremental();
+float Bordage_Get_Angle();
 
 #define Timer_Start(Timer) (Timer->CR1 |= 0x1)
 #define Timer_Stop(Timer) (Timer->CR1 &= ~0x1)
