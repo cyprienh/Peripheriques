@@ -37,6 +37,8 @@ int main (void) {
 	Bordage_Incremental();
 	// 45 -> 0
 	// 180 -> 90
+	
+	Timer_PWM_Set_Duty_Cycle(TIM1, 2, Bordage_Commande);
 	do {
 		Bordage_a = Bordage_Get_Angle() - 180.0;
 		if(Bordage_a > 45.0 && Bordage_a < 180.0) {
@@ -46,6 +48,6 @@ int main (void) {
 		} else {
 			Bordage_Commande = 0.0;
 		}
-		Timer_PWM_Set_Duty_Cycle(TIM1, 2, Bordage_Commande);
+		
 	} while (1);
 }
