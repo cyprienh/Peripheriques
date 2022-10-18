@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'FC1_Bordage' 
+ * Project: 'F1_Bordage' 
  * Target:  'Réel' 
  */
 

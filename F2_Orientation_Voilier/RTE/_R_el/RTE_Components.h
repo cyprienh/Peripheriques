@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'TP4_UART' 
+ * Project: 'Orientation_Voilier' 
  * Target:  'Réel' 
  */
 

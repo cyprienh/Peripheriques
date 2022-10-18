@@ -29,7 +29,7 @@ int main (void) {
 			
 			Timer_PWM(TIM3, 3);												
 			Timer_PWM_Set_Duty_Cycle(TIM3, 3, Plateau_DutyCycle);
-			GPIO_Reset(GPIOA, 7);											// Set dir bit to 0
+			GPIO_Reset(GPIOB, 1);											// Set dir bit to 0
 			set = 1;
 			
 		}	else {																		// Turning right
@@ -37,7 +37,7 @@ int main (void) {
 			
 			Timer_PWM(TIM3, 3);												
 			Timer_PWM_Set_Duty_Cycle(TIM3, 3, Plateau_DutyCycle);
-			GPIO_Set(GPIOA, 7);												// Set dir bit to 1
+			GPIO_Set(GPIOB, 1);												// Set dir bit to 1
 			set = 1;
 		}
 		

@@ -1,0 +1,22 @@
+#ifndef BORDAGE_H
+#define BORDAGE_H
+
+#define DT_0 	0.06
+#define DT_90	0.097
+
+#define BORDAGE_TIMER_INCREMENTAL TIM1
+#define BORDAGE_TIMER_PWM					TIM2
+
+#define GPIO_AB GPIOA
+#define PIN_A		8
+#define PIN_B		9
+
+#define GPIO_Z 	GPIOD
+#define PIN_Z 	2
+
+// F1 - Bordage
+void Bordage_Init(void);
+void Bordage_Calibration(void);		// EN TOUT PREMIER -> INTERRUPT HANDLER
+float Bordage_Get_Angle(void);
+
+#endif

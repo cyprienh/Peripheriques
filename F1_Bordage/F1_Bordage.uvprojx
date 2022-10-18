@@ -389,9 +389,14 @@
               <FilePath>.\Source\Main.c</FilePath>
             </File>
             <File>
-              <FileName>Mapping.h</FileName>
+              <FileName>Bordage.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Mapping.h</FilePath>
+              <FilePath>.\Source\Bordage.h</FilePath>
+            </File>
+            <File>
+              <FileName>Bordage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Bordage.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -801,9 +806,14 @@
               <FilePath>.\Source\Main.c</FilePath>
             </File>
             <File>
-              <FileName>Mapping.h</FileName>
+              <FileName>Bordage.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Mapping.h</FilePath>
+              <FilePath>.\Source\Bordage.h</FilePath>
+            </File>
+            <File>
+              <FileName>Bordage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Bordage.c</FilePath>
             </File>
           </Files>
         </Group>

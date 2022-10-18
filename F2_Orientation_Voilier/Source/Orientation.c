@@ -4,7 +4,7 @@
 #include "Driver_UART.h"
 #include "Driver_Timer.h"
 
-int Orientation_RX;
+signed char Orientation_RX;
 
 void (*Orientation_IRQHandlerPointer) (void);
 
@@ -49,7 +49,8 @@ void Orientation_Init() {
 void Orientation_ActiveIT(void (*IT_function)(void)) {
 	char Prio = 10;
 	char IRQn = 39; 									// USART 3 IRQn in RM0008
-	USART3->CR1 |= (0x1 >> 5); 				// Enable RXNEIE (Interrupt when RX) 
+	
+	USART3->CR1 |= (0x1 << 5); 				// Enable RXNEIE (Interrupt when RX) 
 
 	Orientation_IRQHandlerPointer = IT_function;
 	
@@ -61,8 +62,9 @@ void Orientation_Receive(void) {
 	Orientation_RX = UART_ReadByte(USART3);
 }
 
-void Orientation_Receive_Handler(void) {
+void USART3_IRQHandler(void) {
 	// No need to clear the flag? RXNEIE is cleared by a read to ->DR
+	USART3->SR &= ~(0x1 << 5);
 	
 	if (Orientation_IRQHandlerPointer != 0)
 		(*Orientation_IRQHandlerPointer) ();
