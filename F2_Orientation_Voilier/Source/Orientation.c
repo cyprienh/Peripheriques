@@ -63,8 +63,7 @@ void Orientation_Receive(void) {
 }
 
 void USART3_IRQHandler(void) {
-	// No need to clear the flag? RXNEIE is cleared by a read to ->DR
-	USART3->SR &= ~(0x1 << 5);
+	USART3->SR &= ~(0x1 << 5);			// Clear flag
 	
 	if (Orientation_IRQHandlerPointer != 0)
 		(*Orientation_IRQHandlerPointer) ();
