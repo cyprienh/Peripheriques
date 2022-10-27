@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'FC3_AntiChavirement' 
+ * Project: 'F3_AntiChavirement' 
  * Target:  'Simulation' 
  */
 

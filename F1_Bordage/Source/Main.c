@@ -31,19 +31,22 @@ int main (void) {
 	//Bordage_Calibration();
 	// 45 -> 0
 	// 180 -> 90
-	while(1) {
+	/*while(1) {
 		Timer_PWM_Set_Duty_Cycle(TIM2, 2, val);
-	}
+	}*/
 	
 	do {
-		Bordage_a = Bordage_Get_Angle() - 180.0;
+		Bordage_a = Bordage_Get_Angle();
+		if (Bordage_a > 180.0)
+			Bordage_a = Bordage_a-360.0;
 		if(Bordage_a > 45.0 && Bordage_a < 180.0) {
-			Bordage_Commande = (2.0*Bordage_a)/3.0-30.0;
+			Bordage_Commande = A*Bordage_a+B;
 		} else if(Bordage_a < -45.0 && Bordage_a > -180.0) {
-			Bordage_Commande = (2.0*(-Bordage_a))/3.0-30.0;
+			Bordage_Commande = A*(-Bordage_a)+B;
 		} else {
-			Bordage_Commande = 0.0;
+			Bordage_Commande = DT_0;
 		}
+		Timer_PWM_Set_Duty_Cycle(TIM2, 2, Bordage_Commande);
 		
 	} while (1);
 }

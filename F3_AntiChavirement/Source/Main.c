@@ -1,39 +1,59 @@
 
 #include "Driver_GPIO.h"
-#include "Driver_Timer.h"
 #include "stm32f10x.h"
+#include "MySPI.h"
+
 
 
 //Utiliser SPI1
-void test(void){
-	GPIO_Struct_TypeDef GPIO_StructA0;
-	GPIO_StructA0.GPIO=GPIOA;
-	GPIO_StructA0.GPIO_Pin=0;
-	GPIO_StructA0.GPIO_Conf=Out_Ppull;
-	GPIO_Init(&GPIO_StructA0);
-	GPIO_Toggle(GPIOA, 0);
-	return;
+#define BW_RATE 		0x2C
+#define POWER_CTL 	0x2D
+#define DATA_FORMAT 0x31
+#define Lecture			3<<6
+#define Ecriture		1<<6
+
+int Chavirement_Read(char Adress, int NombreOctets){ //adresse du registre et nombre d'octets à lire
+	int i;
+	char* Donnees;
+	MySPI_Clear_NSS();
+	MySPI_Send(Adress);
+	for(i=0;i<NombreOctets;i++){
+		MySPI_Read();
+	}
+	MySPI_Set_NSS();
 }
 
-int main (void) {
-	GPIO_Struct_TypeDef GPIO_StructA0;
-	Timer_Struct_TypeDef Timer;
-	
-	GPIO_StructA0.GPIO=GPIOA;
-	GPIO_StructA0.GPIO_Pin=9;
-	GPIO_StructA0.GPIO_Conf=AltOut_Ppull;
-	GPIO_Init(&GPIO_StructA0);
-	
-	Timer.Timer = TIM1;
-	Timer.ARR = 9;
-	Timer.PSC = 71;
+void Chavirement_Config(){
+	MySPI_Clear_NSS();
+	MySPI_Send(BW_RATE & Ecriture); //BW_Rate en écriture
+	MySPI_Send(0x9);
+	MySPI_Set_NSS();
+	MySPI_Clear_NSS();
+	MySPI_Send(POWER_CTL & Ecriture); //POWER_CTL en écriture
+	MySPI_Send(0x8);
+	MySPI_Set_NSS();
+	MySPI_Clear_NSS();
+	MySPI_Send(DATA_FORMAT & Ecriture);//DATA_FORMAT en écriture
+	MySPI_Send(0xA);
+	MySPI_Set_NSS();
 
-	Timer_Init(&Timer);
-	Timer_Start(TIM1);
-	Timer_PWM(TIM1, 2);
-	Timer_PWM_Set_Duty_Cycle(TIM1, 2, 0.2);
+}
+
+
+int main (void) {
+	char donnee;
+	GPIO_Init();
 	
-	Timer_ActiveIT(TIM1,10,&(test));
+  MySPI_Init(SPI1);
+	Chavirement_Config();
+	
+	MySPI_Clear_NSS();
+	MySPI_Send(0x00 & Lecture);
+	donnee = MySPI_Read();
+	MySPI_Set_NSS();
+	
+	
+	
 	
 	do {
 	} while (1);
