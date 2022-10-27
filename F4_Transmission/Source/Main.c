@@ -9,9 +9,15 @@
 
 int main (void) {
 	// Limite de roulis : interruption via Maïlis 
+	GPIO_Struct_TypeDef GPIO_StructC4;
+	
+	GPIO_StructC4.GPIO=GPIOC;
+	GPIO_StructC4.GPIO_Pin=4;
+	GPIO_StructC4.GPIO_Conf=In_Analog;
+	GPIO_Init(&GPIO_StructC4);
 	
 	Transmission_Init();
-	ADC_Init(ADC1, 1); //Init ADC to read battery	
+	ADC_Init(ADC1, 14); //Init ADC to read battery	
 	
 	do {		
 		
