@@ -4,6 +4,9 @@
 #define DT_0 	0.06
 #define DT_90	0.097
 
+#define A (DT_90-DT_0)/(180-45)
+#define B (180*DT_0-45*DT_90)/(180-45)
+
 #define BORDAGE_TIMER_INCREMENTAL TIM1
 #define BORDAGE_TIMER_PWM					TIM2
 
