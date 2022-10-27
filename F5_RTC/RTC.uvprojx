@@ -419,9 +419,9 @@
               <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
             <File>
-              <FileName>Transmission.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\Transmission.c</FilePath>
+              <FileName>Lib_Com_Periph_2022.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\SharedDrivers\Source\Lib_Com_Periph_2022.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -849,9 +849,9 @@
               <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
             <File>
-              <FileName>Transmission.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\Transmission.c</FilePath>
+              <FileName>Lib_Com_Periph_2022.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\SharedDrivers\Source\Lib_Com_Periph_2022.lib</FilePath>
             </File>
           </Files>
         </Group>

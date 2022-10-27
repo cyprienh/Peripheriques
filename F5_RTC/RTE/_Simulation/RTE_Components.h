@@ -3,8 +3,8 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'Transmission' 
- * Target:  'Réel' 
+ * Project: 'RTC' 
+ * Target:  'Simulation' 
  */
 
 #ifndef RTE_COMPONENTS_H
