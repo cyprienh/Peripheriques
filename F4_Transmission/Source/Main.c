@@ -8,15 +8,11 @@
 
 
 int main (void) {
-  int theta = 90;
-	int alpha = 47;
-	char Transmission_InfoBordage[] = "Ouverture de voile : XXX";
+	// Limite de roulis : interruption via Maïlis 
 	
-	// Formattage message
-	UART_Init_TX(USART3);
-	UART_Print(USART3, Transmission_ConvertirBordage(theta, Transmission_InfoBordage));
-	UART_Print(USART3, (char *)Transmission_ConvertirAllure(alpha));
-	//UART_Print(USART3, test);
+	Transmission_Init();
+	ADC_Init(ADC1, 1); //Init ADC to read battery	
+	
 	do {		
 		
 	} while (1);
