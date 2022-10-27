@@ -2,60 +2,58 @@
 #include "Driver_GPIO.h"
 #include "stm32f10x.h"
 #include "MySPI.h"
+#include "AntiChavirement.h"
 
 
 
-//Utiliser SPI1
-#define BW_RATE 		0x2C
-#define POWER_CTL 	0x2D
-#define DATA_FORMAT 0x31
-#define Lecture			3<<6
-#define Ecriture		1<<6
 
-int Chavirement_Read(char Adress, int NombreOctets){ //adresse du registre et nombre d'octets à lire
-	int i;
-	char* Donnees;
+/*char Chavirement_Read(char Adress){ //adresse du registre et nombre d'octets à lire
+
+	char * Donnees;
+	char inter;
+	
 	MySPI_Clear_NSS();
-	MySPI_Send(Adress);
-	for(i=0;i<NombreOctets;i++){
-		MySPI_Read();
-	}
+	MySPI_Send(Adress Lecture SingBytes);
 	MySPI_Set_NSS();
+	inter = MySPI_Read();
+	*Donnees = inter;
+	
+	
+	return inter;
 }
-
-void Chavirement_Config(){
-	MySPI_Clear_NSS();
-	MySPI_Send(BW_RATE & Ecriture); //BW_Rate en écriture
-	MySPI_Send(0x9);
-	MySPI_Set_NSS();
-	MySPI_Clear_NSS();
-	MySPI_Send(POWER_CTL & Ecriture); //POWER_CTL en écriture
-	MySPI_Send(0x8);
-	MySPI_Set_NSS();
-	MySPI_Clear_NSS();
-	MySPI_Send(DATA_FORMAT & Ecriture);//DATA_FORMAT en écriture
-	MySPI_Send(0xA);
-	MySPI_Set_NSS();
-
-}
+*/
 
 
 int main (void) {
-	char donnee;
-	GPIO_Init();
+	char * donnee;
+	char interm;
+	//char donneef;
 	
-  MySPI_Init(SPI1);
+	Accelero_TypeDef MyAccelero;
+	
+	
+  MySPI_Init(SPI1); //Initialisation SPI
 	Chavirement_Config();
 	
-	MySPI_Clear_NSS();
-	MySPI_Send(0x00 & Lecture);
-	donnee = MySPI_Read();
-	MySPI_Set_NSS();
 	
 	
 	
 	
 	do {
+		/*
+		//TEST LECTURE de l'id de l'adxl345
+		MySPI_Clear_NSS();
+		MySPI_Send(0x00 Lecture SingBytes); //On envoit l'adresse où se trouve l'id + l'info qu'on veut être en lecture 
+		//MySPI_Send(lectureid);
+		inter = MySPI_Read();
+		donnee = &inter;
+		MySPI_Set_NSS();
+		
+		interm = Chavirement_Read(0x00);
+		*donnee = interm;
+		*/
+		Chavirement_Accelero_Read(&MyAccelero);
+		
 	} while (1);
 	
 }

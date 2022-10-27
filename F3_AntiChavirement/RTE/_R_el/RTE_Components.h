@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'TP2_Timer' 
+ * Project: 'F3_AntiChavirement' 
  * Target:  'Réel' 
  */
 

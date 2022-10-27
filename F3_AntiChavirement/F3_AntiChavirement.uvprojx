@@ -423,6 +423,11 @@
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_SPI.c</FilePath>
             </File>
+            <File>
+              <FileName>Lib_Com_Periph_2022.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\SharedDrivers\Source\Lib_Com_Periph_2022.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -849,6 +854,11 @@
               <FileName>Driver_SPI.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_SPI.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lib_Com_Periph_2022.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\SharedDrivers\Source\Lib_Com_Periph_2022.lib</FilePath>
             </File>
           </Files>
         </Group>
