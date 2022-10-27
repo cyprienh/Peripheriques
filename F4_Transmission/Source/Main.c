@@ -16,6 +16,7 @@ int main (void) {
 	UART_Init_TX(USART3);
 	UART_Print(USART3, Transmission_ConvertirBordage(theta, Transmission_InfoBordage));
 	UART_Print(USART3, (char *)Transmission_ConvertirAllure(alpha));
+	//UART_Print(USART3, test);
 	do {		
 		
 	} while (1);

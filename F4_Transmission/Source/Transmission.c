@@ -5,7 +5,7 @@
 
 const char * Transmission_ConvertirAllure (int alpha) {
 	const char *ventdebout = "Le voilier navigue en vent debout";
-	const char *aupres = "Le voilier navigue au près";
+	const char *aupres = "Le voilier navigue au près\n";
 	const char *aulargue = "Le voilier navigue en vent debout";
 	const char *augrandlargue = "Le voilier navigue au grand largue";
 	const char *enventarriere = "Le voilier navigue en vent arrière";
@@ -26,12 +26,12 @@ const char * Transmission_ConvertirAllure (int alpha) {
 
 char * Transmission_ConvertirBordage (int theta, char * message) {
 	if (theta > 0) {
-		message[21] = ' ';
+		message[21] = '+';
 	} else {
 		message[21] = '-';	
 	}
-	message[22] = (char)((theta % 10)-48);
-	message[23] = (char)((theta/10%10)-48);
+	message[23] = (char)((theta % 10)+48);
+	message[22] = (char)((theta/10%10)+48);
 	
 	return message;
 }
