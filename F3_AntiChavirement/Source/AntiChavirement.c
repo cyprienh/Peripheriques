@@ -14,7 +14,7 @@ void Chavirement_Config(){
 	MySPI_Set_NSS();
 	MySPI_Clear_NSS();
 	MySPI_Send(DATA_FORMAT Ecriture MultBytes);//DATA_FORMAT en écriture
-	MySPI_Send(0xA);
+	MySPI_Send(0xB);
 	MySPI_Set_NSS();
 
 }
@@ -22,8 +22,33 @@ void Chavirement_Config(){
 
 
 void Chavirement_Accelero_Read(Accelero_TypeDef * ptr){
+	int X0;
+	int X1;
+	int Y0;
+	int Y1;
+	int Z0;
+	int Z1;
+	//Lecture des infos de X
+	MySPI_Clear_NSS();
+	MySPI_Send(DATA_X0 Lecture MultBytes); 
+	X0 = MySPI_Read();
+	X1 = MySPI_Read();
+	Y0 = MySPI_Read();
+	Y1 = MySPI_Read();
+	Z0 = MySPI_Read();
+	Z1 = MySPI_Read();
+	MySPI_Set_NSS();
 	
+	ptr->AccX = ptr->AccX &~(255);
+	ptr->AccX = ptr->AccX &~(255<<8);
+	ptr->AccY = ptr->AccY &~(255);
+	ptr->AccY = ptr->AccY &~(255<<8);
+	ptr->AccZ = ptr->AccZ &~(255);
+	ptr->AccZ = ptr->AccZ &~(255<<8);
 	
+	ptr->AccX = ptr->AccX | X0 | (X1<<8);
+	ptr->AccY = ptr->AccY | Y0 | (Y1<<8);
+	ptr->AccZ = ptr->AccZ | Z0 | (Z1<<8);
 	
 }
 

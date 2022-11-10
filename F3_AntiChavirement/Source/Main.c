@@ -3,7 +3,7 @@
 #include "stm32f10x.h"
 #include "MySPI.h"
 #include "AntiChavirement.h"
-
+#include "math.h"
 
 
 
@@ -22,15 +22,26 @@
 	return inter;
 }
 */
+Accelero_TypeDef MyAccelero;
+float Angle;
+float Xg;
+float Yg;
+float Zg;
+
 
 
 int main (void) {
-	char * donnee;
-	char interm;
-	//char donneef;
+	//char * donnee;
+	//char interm;
+	//char adresseTest;
 	
-	Accelero_TypeDef MyAccelero;
 	
+	int Chavirement = 0;
+	Angle = 0;
+	
+	MyAccelero.AccX = 0;
+	MyAccelero.AccY = 0;
+	MyAccelero.AccZ = 0;
 	
   MySPI_Init(SPI1); //Initialisation SPI
 	Chavirement_Config();
@@ -45,15 +56,26 @@ int main (void) {
 		MySPI_Clear_NSS();
 		MySPI_Send(0x00 Lecture SingBytes); //On envoit l'adresse où se trouve l'id + l'info qu'on veut être en lecture 
 		//MySPI_Send(lectureid);
-		inter = MySPI_Read();
-		donnee = &inter;
+		adresseTest = MySPI_Read();
 		MySPI_Set_NSS();
-		
-		interm = Chavirement_Read(0x00);
-		*donnee = interm;
 		*/
-		Chavirement_Accelero_Read(&MyAccelero);
 		
+		Chavirement_Accelero_Read(&MyAccelero); //récupération des valeurs de l'accéléro
+		
+		//Composantes normalisées
+		Xg = MyAccelero.AccX * 4e-3;
+		Yg = MyAccelero.AccY * 4e-3;
+		Zg = MyAccelero.AccZ * 4e-3;
+		if (Yg*Zg<0){
+			Angle = atan(-(Yg/Zg));
+		} else 
+			Angle = atan(Yg/Zg);
+		if (Angle >= 0.698){ //40 degre convertit en rad
+			Chavirement = 1;
+		}	else 
+			Chavirement = 0;
+		
+			
 	} while (1);
 	
 }
