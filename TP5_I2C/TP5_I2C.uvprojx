@@ -134,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4096</DriverSelection>
+            <DriverSelection>-1</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -388,16 +388,6 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Main.c</FilePath>
             </File>
-            <File>
-              <FileName>RTC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\RTC.c</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\RTC.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -414,6 +404,11 @@
               <FilePath>..\SharedDrivers\Source\Driver_ADC.c</FilePath>
             </File>
             <File>
+              <FileName>Driver_Timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
+            </File>
+            <File>
               <FileName>Driver_UART.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_UART.c</FilePath>
@@ -422,11 +417,6 @@
               <FileName>Driver_STD.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_STD.c</FilePath>
-            </File>
-            <File>
-              <FileName>Driver_Timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
             <File>
               <FileName>Driver_I2C.c</FileName>
@@ -828,16 +818,6 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Main.c</FilePath>
             </File>
-            <File>
-              <FileName>RTC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\RTC.c</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\RTC.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -854,6 +834,11 @@
               <FilePath>..\SharedDrivers\Source\Driver_ADC.c</FilePath>
             </File>
             <File>
+              <FileName>Driver_Timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
+            </File>
+            <File>
               <FileName>Driver_UART.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_UART.c</FilePath>
@@ -862,11 +847,6 @@
               <FileName>Driver_STD.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_STD.c</FilePath>
-            </File>
-            <File>
-              <FileName>Driver_Timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
             <File>
               <FileName>Driver_I2C.c</FileName>
