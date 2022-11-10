@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Include;..\SharedDrivers\Include</IncludePath>
+              <IncludePath>.\Include;..\SharedDrivers\Include;..\F1_Bordage\Source;..\F2_Orientation_Voilier\Include;..\F4_Transmission\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -419,9 +419,19 @@
               <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
             <File>
+              <FileName>Orientation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F2_Orientation_Voilier\Source\Orientation.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bordage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F1_Bordage\Source\Bordage.c</FilePath>
+            </File>
+            <File>
               <FileName>Transmission.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\Transmission.c</FilePath>
+              <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -769,7 +779,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Include;..\SharedDrivers\Include</IncludePath>
+              <IncludePath>.\Include;..\SharedDrivers\Include;..\F1_Bordage\Source;..\F2_Orientation_Voilier\Include;..\F3_AntiChavirement\Include;..\F4_Transmission\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -849,9 +859,19 @@
               <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
             <File>
+              <FileName>Orientation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F2_Orientation_Voilier\Source\Orientation.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bordage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F1_Bordage\Source\Bordage.c</FilePath>
+            </File>
+            <File>
               <FileName>Transmission.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\Transmission.c</FilePath>
+              <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
             </File>
           </Files>
         </Group>

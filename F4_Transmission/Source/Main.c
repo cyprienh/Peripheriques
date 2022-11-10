@@ -8,7 +8,6 @@
 
 
 int main (void) {
-	// Limite de roulis : interruption via Maïlis 
 	GPIO_Struct_TypeDef GPIO_StructC4;
 	
 	GPIO_StructC4.GPIO=GPIOC;

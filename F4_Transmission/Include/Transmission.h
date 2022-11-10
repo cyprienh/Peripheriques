@@ -3,7 +3,6 @@
 
 #include "stm32f10x.h"
 
-//extern signed char Orientation_RX;
 
 void Transmission_Init(void);
 
