@@ -3,10 +3,14 @@
 #include "Driver_Timer.h"
 #include "Driver_UART.h"
 #include "Driver_STD.h"
+#include "Driver_I2C.h"
+
 #include "stm32f10x.h"
+
 #include "Orientation.h"
 #include "Bordage.h"
 #include "Transmission.h"
+#include "RTC.h"
 
 // ------------------------------------------------
 // Xbee connecté au USART3
@@ -70,6 +74,16 @@ int main (void) {
 	// F3 - Variable declaration and inits
 	//
 	// ------------------------------------------------
+	
+	
+	// ------------------------------------------------
+	//
+	// F5 - Variable declaration and inits
+	//
+	// ------------------------------------------------
+		
+	I2C_Init(I2C1);
+	RTC_Set_Time_Date(I2C1, 0,33,11,4,10,11,22);
 	
 	
 	// ------------------------------------------------

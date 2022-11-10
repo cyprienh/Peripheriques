@@ -433,6 +433,16 @@
               <FileType>1</FileType>
               <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
             </File>
+            <File>
+              <FileName>RTC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_I2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SharedDrivers\Source\Driver_I2C.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -779,7 +789,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Include;..\SharedDrivers\Include;..\F1_Bordage\Source;..\F2_Orientation_Voilier\Include;..\F3_AntiChavirement\Include;..\F4_Transmission\Include</IncludePath>
+              <IncludePath>.\Include;..\SharedDrivers\Include;..\F1_Bordage\Source;..\F2_Orientation_Voilier\Include;..\F3_AntiChavirement\Include;..\F4_Transmission\Include;..\F5_RTC\Source</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -872,6 +882,16 @@
               <FileName>Transmission.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_I2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SharedDrivers\Source\Driver_I2C.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -5,11 +5,13 @@
 #include "Driver_GPIO.h"
 #include "Driver_Timer.h"
 #include "Driver_ADC.h"
-#include "Bordage.h"
 
+#include "Bordage.h"
+#include "RTC.h"
 
 	float Bordage_a;
 	int Bordage_theta;
+	float Voltage_Bat = 0.0;
 
 void Transmission_Init() {
 	Timer_Struct_TypeDef Transmission_Timer;
@@ -22,19 +24,24 @@ void Transmission_Init() {
 
 	Timer_Init(&Transmission_Timer);
 	Timer_Start(TIM4);
-	ADC_Init(ADC1, 14);
 	
 	Timer_ActiveIT(TIM4 , 20, &(Transmission_SendRegInfo));
+	
+	ADC_Init(ADC1, 14);	
 }
 
 void Transmission_SendRegInfo() { 
-	char Transmission_InfoBordage[] = "Ouverture : XXX \n";
-	// char Transmission_InfoBatterie[] = "Batterie : X.XXmV \n";
+	char Transmission_date[20] = "00/00/00 - 00:00:00\n";
+	char Transmission_InfoBordage[] = "Ouverture : 000 \n";
+	char Transmission_InfoBatterie[] = "Batterie : 00.0 \n";
 	
+	//Voltage_Bat = ADC_Read(ADC1)*13.0;	
+	RTC_Get_Date_Time(I2C1, Transmission_date);
 	
+	UART_Print(USART3, Transmission_date);
 	UART_Print(USART3, Transmission_ConvertirBordage(Bordage_theta, Transmission_InfoBordage));
 	UART_Print(USART3, (char *)Transmission_ConvertirAllure((int)Bordage_a));
-	//UART_Print(USART3, Transmission_ConvertirBatterie((ADC_Read(ADC1)*13), Transmission_InfoBatterie));
+	UART_Print(USART3, Transmission_ConvertirBatterie(Voltage_Bat, Transmission_InfoBatterie));
 }
 
 // Chooses correct message
@@ -66,7 +73,7 @@ char * Transmission_ConvertirBordage (int theta, char * message) {
 		message[12] = '-';	
 	}
 	
-	message[13] = (char)((theta/10%10)+48);
+	message[13] = (char)(theta/10+48);
 	message[14] = (char)((theta % 10)+48);
 	
 	return message;
@@ -74,9 +81,9 @@ char * Transmission_ConvertirBordage (int theta, char * message) {
 
 // Formats the message for ascii
 char * Transmission_ConvertirBatterie (float batterie, char * message) {
-	message[11] = (char)((int)batterie+48);
-	message[12] = (char)((int)(batterie*10)%10+48);
-	message[13] = (char)((int)(batterie*100)%10+48);
+	message[11] = (char)((int)(batterie/10)+48);
+	message[12] = (char)((((int)(batterie))%10)+48);
+	message[14] = (char)(((int)(batterie*10))%10+48);
 	
 	return message;
 }
