@@ -7,11 +7,15 @@
 #include "Driver_ADC.h"
 
 #include "Bordage.h"
+#include "AntiChavirement.h"
 #include "RTC.h"
 
 	float Bordage_a;
 	int Bordage_theta;
 	float Voltage_Bat = 0.0;
+	
+	char AChavire;
+	char Chavirement;
 
 void Transmission_Init() {
 	Timer_Struct_TypeDef Transmission_Timer;
@@ -28,20 +32,40 @@ void Transmission_Init() {
 	Timer_ActiveIT(TIM4 , 20, &(Transmission_SendRegInfo));
 	
 	ADC_Init(ADC1, 14);	
+	ADC_ActiveIT(ADC1 , 10, &(Read_Battery));
 }
 
 void Transmission_SendRegInfo() { 
-	char Transmission_date[20] = "00/00/00 - 00:00:00\n";
-	char Transmission_InfoBordage[] = "Ouverture : 000 \n";
-	char Transmission_InfoBatterie[] = "Batterie : 00.0 \n";
+	char Transmission_date[21] = "00/00/00 - 00:00:00\n\0";
+	char Transmission_InfoBordage[18] = "Ouverture : 000 \n\0";
+	char Transmission_InfoChavirement[22] = "Le bateau a chavire \n\0";
+	char Transmission_InfoBatterie[26] = "Batterie faible : 00.0V \n\0";
+	char LineBreak[2] = "\n\0";
 	
-	//Voltage_Bat = ADC_Read(ADC1)*13.0;	
+	ADC_Read(ADC1);	
+	
 	RTC_Get_Date_Time(I2C1, Transmission_date);
+	Transmission_ConvertirBordage(Bordage_theta, Transmission_InfoBordage);
 	
 	UART_Print(USART3, Transmission_date);
-	UART_Print(USART3, Transmission_ConvertirBordage(Bordage_theta, Transmission_InfoBordage));
+	UART_Print(USART3, Transmission_InfoBordage);
 	UART_Print(USART3, (char *)Transmission_ConvertirAllure((int)Bordage_a));
-	UART_Print(USART3, Transmission_ConvertirBatterie(Voltage_Bat, Transmission_InfoBatterie));
+	
+	if (AChavire == 1) 
+			UART_Print(USART3, Transmission_InfoChavirement);
+			AChavire = 0;
+	
+	if (Voltage_Bat < 10.0) {
+		Transmission_ConvertirBatterie(Voltage_Bat, Transmission_InfoBatterie);
+		UART_Print(USART3, Transmission_InfoBatterie);
+	}
+	
+	UART_Print(USART3, LineBreak);
+}
+
+void Read_Battery() {
+	Voltage_Bat = (ADC1->DR * (3.3f/4096.0f))*13.0;
+	
 }
 
 // Chooses correct message
@@ -66,7 +90,7 @@ const char * Transmission_ConvertirAllure (int alpha) {
 }
 
 // Formats the message for ascii
-char * Transmission_ConvertirBordage (int theta, char * message) {
+void Transmission_ConvertirBordage (int theta, char * message) {
 	if (theta > 0) {
 		message[12] = '+';
 	} else {
@@ -75,16 +99,12 @@ char * Transmission_ConvertirBordage (int theta, char * message) {
 	
 	message[13] = (char)(theta/10+48);
 	message[14] = (char)((theta % 10)+48);
-	
-	return message;
 }
 
 // Formats the message for ascii
-char * Transmission_ConvertirBatterie (float batterie, char * message) {
-	message[11] = (char)((int)(batterie/10)+48);
-	message[12] = (char)((((int)(batterie))%10)+48);
-	message[14] = (char)(((int)(batterie*10))%10+48);
-	
-	return message;
+void Transmission_ConvertirBatterie (float batterie, char * message) {
+	message[18] = (char)((int)(batterie/10)+48);
+	message[19] = (char)((((int)(batterie))%10)+48);
+	message[21] = (char)(((int)(batterie*10))%10+48);
 }
 
