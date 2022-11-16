@@ -4,6 +4,7 @@
 #include "Driver_UART.h"
 #include "Driver_STD.h"
 #include "Driver_I2C.h"
+#include "Driver_SysTick.h"
 #include "MySPI.h"
 
 #include "stm32f10x.h"
@@ -23,10 +24,18 @@ float Xg;
 float Yg;
 float Zg;
 
+unsigned long tick = 0;
+
 extern char Chavirement;
 extern char AChavire;
 
+void Tick_Handler() {
+	++tick;
+}
+
 int main (void) {
+	unsigned long last_tick = 0;
+	
 	// F1 
 	// Bordage_a and Bordage_theta defined as external in bordage.c
 	// To be used in transmission.c
@@ -122,67 +131,74 @@ int main (void) {
 	//
 	// ------------------------------------------------
 	
+	SysTick_Init(&Tick_Handler);
+	
 	do {		
 		// F1
+		if(last_tick != tick) {
+			last_tick = tick;
 		
-		Bordage_a = Bordage_Get_Angle();
-		if (Chavirement == 0) {
-			if (Bordage_a > 180.0)
-				Bordage_a = Bordage_a-360.0;
-			if(Bordage_a > 45.0 && Bordage_a < 180.0) {
-				Bordage_Commande = A*Bordage_a+B;
-				Bordage_theta = (int)(Atheta*Bordage_a+Btheta);
-			} else if(Bordage_a < -45.0 && Bordage_a > -180.0) {
-				Bordage_Commande = A*(-Bordage_a)+B;
-				Bordage_theta = (int)(Atheta*(-Bordage_a)+Btheta);
-			} else {
+			Bordage_a = Bordage_Get_Angle();
+			if (Chavirement == 0) {
+				if (Bordage_a > 180.0)
+					Bordage_a = Bordage_a-360.0;
+				if(Bordage_a > 45.0 && Bordage_a < 180.0) {
+					Bordage_Commande = A*Bordage_a+B;
+					Bordage_theta = (int)(Atheta*Bordage_a+Btheta);
+				} else if(Bordage_a < -45.0 && Bordage_a > -180.0) {
+					Bordage_Commande = A*(-Bordage_a)+B;
+					Bordage_theta = (int)(Atheta*(-Bordage_a)+Btheta);
+				} else {
+					Bordage_Commande = DT_0;
+					Bordage_theta = 0;
+				}
+			}
+			else {
 				Bordage_Commande = DT_0;
 				Bordage_theta = 0;
 			}
-		}
-		else {
-			Bordage_Commande = DT_0;
-			Bordage_theta = 0;
-		}
-		Timer_PWM_Set_Duty_Cycle(TIM2, 2, Bordage_Commande);
-		
-		// F2
-		
-		if (Orientation_RX <= 0) {									// Turning left
-			Plateau_DutyCycle = (float)(-Orientation_RX)/100;
+			Timer_PWM_Set_Duty_Cycle(TIM2, 2, Bordage_Commande);
 			
-			Timer_PWM(TIM3, 3);												
-			Timer_PWM_Set_Duty_Cycle(TIM3, 3, Plateau_DutyCycle);
-			GPIO_Reset(GPIOB, 1);											// Set dir bit to 0
+			// F2
 			
-		}	else {																		// Turning right
-			Plateau_DutyCycle = (float)Orientation_RX/100;
+			if (Orientation_RX <= 0) {									// Turning left
+				Plateau_DutyCycle = (float)(-Orientation_RX)/100;
+				
+				Timer_PWM(TIM3, 3);												
+				Timer_PWM_Set_Duty_Cycle(TIM3, 3, Plateau_DutyCycle);
+				GPIO_Reset(GPIOB, 1);											// Set dir bit to 0
+				
+			}	else {																		// Turning right
+				Plateau_DutyCycle = (float)Orientation_RX/100;
+				
+				Timer_PWM(TIM3, 3);												
+				Timer_PWM_Set_Duty_Cycle(TIM3, 3, Plateau_DutyCycle);
+				GPIO_Set(GPIOB, 1);												// Set dir bit to 1
+			}
 			
-			Timer_PWM(TIM3, 3);												
-			Timer_PWM_Set_Duty_Cycle(TIM3, 3, Plateau_DutyCycle);
-			GPIO_Set(GPIOB, 1);												// Set dir bit to 1
+			// F3
+			
+			Chavirement_Accelero_Read(&MyAccelero); 		// Get accelerometer values
+			
+			// Normalised coordinates
+			Xg = MyAccelero.AccX * 4e-3;
+			Yg = MyAccelero.AccY * 4e-3;
+			Zg = MyAccelero.AccZ * 4e-3;
+			if (Yg*Zg < 0){
+				Angle = atan(-(Yg/Zg));
+			} else 
+				Angle = atan(Yg/Zg);
+			if (fabs(Angle) >= 0.698){ 									// 40 degrees in rad
+				Chavirement = 1;
+				AChavire = 1;
+			}	else 
+				Chavirement = 0;
+			
+			// F4 & F5 - interrupts only
+			if(last_tick % 3000 == 0) {
+				Transmission_SendRegInfo();
+			}
 		}
-		
-		// F3
-		
-		Chavirement_Accelero_Read(&MyAccelero); 		// Get accelerometer values
-		
-		// Normalised coordinates
-		Xg = MyAccelero.AccX * 4e-3;
-		Yg = MyAccelero.AccY * 4e-3;
-		Zg = MyAccelero.AccZ * 4e-3;
-		if (Yg*Zg < 0){
-			Angle = atan(-(Yg/Zg));
-		} else 
-			Angle = atan(Yg/Zg);
-		if (fabs(Angle) >= 0.698){ 									// 40 degrees in rad
-			Chavirement = 1;
-			AChavire = 1;
-		}	else 
-			Chavirement = 0;
-		
-		// F4 & F5 - interrupts only
-		
 		
 	} while (1);
 }

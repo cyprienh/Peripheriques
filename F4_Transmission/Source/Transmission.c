@@ -29,7 +29,7 @@ void Transmission_Init() {
 	Timer_Init(&Transmission_Timer);
 	Timer_Start(TIM4);
 	
-	Timer_ActiveIT(TIM4 , 20, &(Transmission_SendRegInfo));
+	//Timer_ActiveIT(TIM4 , 20, &(Transmission_SendRegInfo));
 	
 	ADC_Init(ADC1, 14);	
 	ADC_ActiveIT(ADC1 , 10, &(Read_Battery));

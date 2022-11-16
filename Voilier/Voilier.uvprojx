@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32F103RB</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F1xx_DFP.2.3.0</PackID>
+          <PackID>Keil.STM32F1xx_DFP.2.4.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00005000) IROM(0x08000000,0x00020000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -388,6 +388,31 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Main.c</FilePath>
             </File>
+            <File>
+              <FileName>Bordage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F1_Bordage\Source\Bordage.c</FilePath>
+            </File>
+            <File>
+              <FileName>Orientation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F2_Orientation_Voilier\Source\Orientation.c</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
+            </File>
+            <File>
+              <FileName>Transmission.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
+            </File>
+            <File>
+              <FileName>AntiChavirement.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -419,26 +444,6 @@
               <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
             <File>
-              <FileName>Orientation.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\F2_Orientation_Voilier\Source\Orientation.c</FilePath>
-            </File>
-            <File>
-              <FileName>Bordage.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\F1_Bordage\Source\Bordage.c</FilePath>
-            </File>
-            <File>
-              <FileName>Transmission.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
-            </File>
-            <File>
               <FileName>Driver_I2C.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_I2C.c</FilePath>
@@ -449,9 +454,9 @@
               <FilePath>..\SharedDrivers\Source\Lib_Com_Periph_2022.lib</FilePath>
             </File>
             <File>
-              <FileName>AntiChavirement.c</FileName>
+              <FileName>Driver_SysTick.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
+              <FilePath>..\SharedDrivers\Source\Driver_SysTick.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -476,7 +481,7 @@
         <TargetCommonOption>
           <Device>STM32F103RB</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F1xx_DFP.2.3.0</PackID>
+          <PackID>Keil.STM32F1xx_DFP.2.4.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00005000) IROM(0x08000000,0x00020000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -848,6 +853,31 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Main.c</FilePath>
             </File>
+            <File>
+              <FileName>Bordage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F1_Bordage\Source\Bordage.c</FilePath>
+            </File>
+            <File>
+              <FileName>Orientation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F2_Orientation_Voilier\Source\Orientation.c</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
+            </File>
+            <File>
+              <FileName>Transmission.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
+            </File>
+            <File>
+              <FileName>AntiChavirement.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -879,26 +909,6 @@
               <FilePath>..\SharedDrivers\Source\Driver_Timer.c</FilePath>
             </File>
             <File>
-              <FileName>Orientation.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\F2_Orientation_Voilier\Source\Orientation.c</FilePath>
-            </File>
-            <File>
-              <FileName>Bordage.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\F1_Bordage\Source\Bordage.c</FilePath>
-            </File>
-            <File>
-              <FileName>Transmission.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
-            </File>
-            <File>
-              <FileName>RTC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
-            </File>
-            <File>
               <FileName>Driver_I2C.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_I2C.c</FilePath>
@@ -909,9 +919,9 @@
               <FilePath>..\SharedDrivers\Source\Lib_Com_Periph_2022.lib</FilePath>
             </File>
             <File>
-              <FileName>AntiChavirement.c</FileName>
+              <FileName>Driver_SysTick.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
+              <FilePath>..\SharedDrivers\Source\Driver_SysTick.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -971,7 +981,7 @@
       <file attr="config" category="header" name="RTE_Driver\Config\RTE_Device.h" version="1.1.2">
         <instance index="0">RTE\Device\STM32F103RB\RTE_Device.h</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.0" condition="STM32F1xx CMSIS"/>
-        <package name="STM32F1xx_DFP" schemaVersion="1.4.0" url="http://www.keil.com/pack/" vendor="Keil" version="2.3.0"/>
+        <package name="STM32F1xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="2.4.0"/>
         <targetInfos>
           <targetInfo name="Réel"/>
           <targetInfo name="Simulation"/>
@@ -980,7 +990,7 @@
       <file attr="config" category="source" condition="STM32F1xx MD ARMCC" name="Device\Source\ARM\startup_stm32f10x_md.s" version="1.0.0">
         <instance index="0">RTE\Device\STM32F103RB\startup_stm32f10x_md.s</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.0" condition="STM32F1xx CMSIS"/>
-        <package name="STM32F1xx_DFP" schemaVersion="1.4.0" url="http://www.keil.com/pack/" vendor="Keil" version="2.3.0"/>
+        <package name="STM32F1xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="2.4.0"/>
         <targetInfos>
           <targetInfo name="Réel"/>
           <targetInfo name="Simulation"/>
@@ -989,7 +999,7 @@
       <file attr="config" category="source" name="Device\Source\system_stm32f10x.c" version="1.0.0">
         <instance index="0">RTE\Device\STM32F103RB\system_stm32f10x.c</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.0" condition="STM32F1xx CMSIS"/>
-        <package name="STM32F1xx_DFP" schemaVersion="1.4.0" url="http://www.keil.com/pack/" vendor="Keil" version="2.3.0"/>
+        <package name="STM32F1xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="2.4.0"/>
         <targetInfos>
           <targetInfo name="Réel"/>
           <targetInfo name="Simulation"/>
