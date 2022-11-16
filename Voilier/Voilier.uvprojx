@@ -443,6 +443,16 @@
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_I2C.c</FilePath>
             </File>
+            <File>
+              <FileName>Lib_Com_Periph_2022.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\SharedDrivers\Source\Lib_Com_Periph_2022.lib</FilePath>
+            </File>
+            <File>
+              <FileName>AntiChavirement.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -892,6 +902,16 @@
               <FileName>Driver_I2C.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SharedDrivers\Source\Driver_I2C.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lib_Com_Periph_2022.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\SharedDrivers\Source\Lib_Com_Periph_2022.lib</FilePath>
+            </File>
+            <File>
+              <FileName>AntiChavirement.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
             </File>
           </Files>
         </Group>

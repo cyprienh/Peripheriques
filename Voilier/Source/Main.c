@@ -4,33 +4,38 @@
 #include "Driver_UART.h"
 #include "Driver_STD.h"
 #include "Driver_I2C.h"
+#include "MySPI.h"
 
 #include "stm32f10x.h"
+#include "math.h"
 
 #include "Orientation.h"
 #include "Bordage.h"
 #include "Transmission.h"
 #include "RTC.h"
+#include "AntiChavirement.h"
 
-// ------------------------------------------------
-// Xbee connecté au USART3
-// Plateau Dir to PB1
-// Plateau PWM to PB0
 
-// augmenter ARR
-// ajouter interruption
-// ------------------------------------------------
-
+// F3 
+Accelero_TypeDef MyAccelero;
+float Angle;
+float Xg;
+float Yg;
+float Zg;
 
 int main (void) {
 	// F1 
-	// Bordage_a and Bordage_theta defined as external
+	// Bordage_a and Bordage_theta defined as external in bordage.c
+	// To be used in transmission.c
 	float Bordage_Commande;
 	
 	// F2
 	float Plateau_DutyCycle;
 	
-	// G4 
+	// F3
+	int Chavirement = 0;
+	
+	// F4 
 	GPIO_Struct_TypeDef GPIO_StructC4;
 	
 	// ------------------------------------------------
@@ -75,6 +80,14 @@ int main (void) {
 	//
 	// ------------------------------------------------
 	
+	Angle = 0;
+	
+	MyAccelero.AccX = 0;
+	MyAccelero.AccY = 0;
+	MyAccelero.AccZ = 0;
+	
+  MySPI_Init(SPI1); //Initialisation SPI
+	Chavirement_Config();
 	
 	// ------------------------------------------------
 	//
@@ -107,16 +120,23 @@ int main (void) {
 	
 	do {		
 		// F1
+		
 		Bordage_a = Bordage_Get_Angle();
-		if (Bordage_a > 180.0)
-			Bordage_a = Bordage_a-360.0;
-		if(Bordage_a > 45.0 && Bordage_a < 180.0) {
-			Bordage_Commande = A*Bordage_a+B;
-			Bordage_theta = (int)(Atheta*Bordage_a+Btheta);
-		} else if(Bordage_a < -45.0 && Bordage_a > -180.0) {
-			Bordage_Commande = A*(-Bordage_a)+B;
-			Bordage_theta = (int)(Atheta*(-Bordage_a)+Btheta);
-		} else {
+		if (Chavirement == 0) {
+			if (Bordage_a > 180.0)
+				Bordage_a = Bordage_a-360.0;
+			if(Bordage_a > 45.0 && Bordage_a < 180.0) {
+				Bordage_Commande = A*Bordage_a+B;
+				Bordage_theta = (int)(Atheta*Bordage_a+Btheta);
+			} else if(Bordage_a < -45.0 && Bordage_a > -180.0) {
+				Bordage_Commande = A*(-Bordage_a)+B;
+				Bordage_theta = (int)(Atheta*(-Bordage_a)+Btheta);
+			} else {
+				Bordage_Commande = DT_0;
+				Bordage_theta = 0;
+			}
+		}
+		else {
 			Bordage_Commande = DT_0;
 			Bordage_theta = 0;
 		}
@@ -140,6 +160,20 @@ int main (void) {
 		
 		// F3
 		
+		Chavirement_Accelero_Read(&MyAccelero); //récupération des valeurs de l'accéléro
+		
+		//Composantes normalisées
+		Xg = MyAccelero.AccX * 4e-3;
+		Yg = MyAccelero.AccY * 4e-3;
+		Zg = MyAccelero.AccZ * 4e-3;
+		if (Yg*Zg < 0){
+			Angle = atan(-(Yg/Zg));
+		} else 
+			Angle = atan(Yg/Zg);
+		if (Angle >= 0.698){ //40 degre convertit en rad
+			Chavirement = 1;
+		}	else 
+			Chavirement = 0;
 		
 		// F4 - interrupts only
 		
