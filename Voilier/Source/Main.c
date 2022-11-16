@@ -23,6 +23,9 @@ float Xg;
 float Yg;
 float Zg;
 
+extern char Chavirement;
+extern char AChavire;
+
 int main (void) {
 	// F1 
 	// Bordage_a and Bordage_theta defined as external in bordage.c
@@ -33,7 +36,7 @@ int main (void) {
 	float Plateau_DutyCycle;
 	
 	// F3
-	int Chavirement = 0;
+	//Chavirement defined as external 
 	
 	// F4 
 	GPIO_Struct_TypeDef GPIO_StructC4;
@@ -81,7 +84,8 @@ int main (void) {
 	// ------------------------------------------------
 	
 	Angle = 0;
-	
+	Chavirement = 0;
+	AChavire = 0;
 	MyAccelero.AccX = 0;
 	MyAccelero.AccY = 0;
 	MyAccelero.AccZ = 0;
@@ -143,7 +147,8 @@ int main (void) {
 		Timer_PWM_Set_Duty_Cycle(TIM2, 2, Bordage_Commande);
 		
 		// F2
-		if (Orientation_RX <= 0) {											// Turning left
+		
+		if (Orientation_RX <= 0) {									// Turning left
 			Plateau_DutyCycle = (float)(-Orientation_RX)/100;
 			
 			Timer_PWM(TIM3, 3);												
@@ -160,9 +165,9 @@ int main (void) {
 		
 		// F3
 		
-		Chavirement_Accelero_Read(&MyAccelero); //récupération des valeurs de l'accéléro
+		Chavirement_Accelero_Read(&MyAccelero); 		// Get accelerometer values
 		
-		//Composantes normalisées
+		// Normalised coordinates
 		Xg = MyAccelero.AccX * 4e-3;
 		Yg = MyAccelero.AccY * 4e-3;
 		Zg = MyAccelero.AccZ * 4e-3;
@@ -170,12 +175,13 @@ int main (void) {
 			Angle = atan(-(Yg/Zg));
 		} else 
 			Angle = atan(Yg/Zg);
-		if (Angle >= 0.698){ //40 degre convertit en rad
+		if (fabs(Angle) >= 0.698){ 									// 40 degrees in rad
 			Chavirement = 1;
+			AChavire = 1;
 		}	else 
 			Chavirement = 0;
 		
-		// F4 - interrupts only
+		// F4 & F5 - interrupts only
 		
 		
 	} while (1);

@@ -6,10 +6,11 @@
 
 void Transmission_Init(void);
 
-const char * Transmission_ConvertirAllure (int alpha);
-char * Transmission_ConvertirBordage (int theta, char * message);
-char * Transmission_ConvertirBatterie (float batterie, char * message);
+void Read_Battery(void);
 
+const char * Transmission_ConvertirAllure (int alpha);
+void Transmission_ConvertirBordage (int theta, char * message);
+void Transmission_ConvertirBatterie (float batterie, char * message);
 void Transmission_SendRegInfo(void);
 
 #endif
