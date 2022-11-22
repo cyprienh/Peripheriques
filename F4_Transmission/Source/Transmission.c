@@ -10,12 +10,17 @@
 #include "AntiChavirement.h"
 #include "RTC.h"
 
-	float Bordage_a;
-	int Bordage_theta;
-	float Voltage_Bat = 0.0;
+// ================================
+// 		F4 - Transmission
+//		Emily Holmes
+// ================================
+
+float Bordage_a;
+int Bordage_theta;
+float Voltage_Bat = 0.0;
 	
-	char AChavire;
-	char Chavirement;
+char AChavire;
+char Chavirement;
 
 void Transmission_Init() {
 	Timer_Struct_TypeDef Transmission_Timer;
@@ -29,7 +34,9 @@ void Transmission_Init() {
 	Timer_Init(&Transmission_Timer);
 	Timer_Start(TIM4);
 	
-	//Timer_ActiveIT(TIM4 , 20, &(Transmission_SendRegInfo));
+	#if USE_INTERRUPT_TIMER == 1
+		Timer_ActiveIT(TIM4 , 20, &(Transmission_SendRegInfo));		// Use timer & interrupt instead of systick
+	#endif
 	
 	ADC_Init(ADC1, 14);	
 	ADC_ActiveIT(ADC1 , 10, &(Read_Battery));

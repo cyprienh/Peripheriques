@@ -4,6 +4,11 @@
 #include "Driver_UART.h"
 #include "Driver_Timer.h"
 
+// ================================
+// 		F2 - Orientation
+//		Emily Holmes
+// ================================
+
 signed char Orientation_RX;
 
 void (*Orientation_IRQHandlerPointer) (void);

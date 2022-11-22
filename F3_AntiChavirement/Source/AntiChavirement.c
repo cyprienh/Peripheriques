@@ -2,6 +2,10 @@
 #include "MySPI.h"
 #include "AntiChavirement.h"
 
+// ================================
+// 		F3 - Anti-chavirement
+//		Maïlis Dy
+// ================================
 
 void Chavirement_Config(){
 	MySPI_Clear_NSS();
@@ -16,10 +20,7 @@ void Chavirement_Config(){
 	MySPI_Send(DATA_FORMAT Ecriture MultBytes);//DATA_FORMAT en écriture
 	MySPI_Send(0xB);
 	MySPI_Set_NSS();
-
 }
-
-
 
 void Chavirement_Accelero_Read(Accelero_TypeDef * ptr){
 	int X0;
@@ -49,6 +50,5 @@ void Chavirement_Accelero_Read(Accelero_TypeDef * ptr){
 	ptr->AccX = ptr->AccX | X0 | (X1<<8);
 	ptr->AccY = ptr->AccY | Y0 | (Y1<<8);
 	ptr->AccZ = ptr->AccZ | Z0 | (Z1<<8);
-	
 }
 

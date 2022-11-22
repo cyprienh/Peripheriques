@@ -1,6 +1,12 @@
 #include "RTC.h"
 #include "Driver_I2C.h"
 
+// ================================
+// 		F5 - RTC
+//		Cyprien Heusse
+// ================================
+
+// Write the correct values into the RTC's registers to set date & time
 void RTC_Set_Time_Date(I2C_TypeDef* I2C, int s, int min, int h, int w, int d, int m, int y) {
 	char data[1];
 	if(s<60 && min<60 && h<24 && w<=7 && d<=31 && m<=12 && y<100) {
@@ -23,6 +29,7 @@ void RTC_Set_Time_Date(I2C_TypeDef* I2C, int s, int min, int h, int w, int d, in
 	}
 }
 
+// Build String from RTC's data by reading the values and converting them to String
 void RTC_Get_Date_Time(I2C_TypeDef* I2C, char* time) {
 	char data[1];
 	I2C_Read(I2C, 0x68, 0x02, data, 1);

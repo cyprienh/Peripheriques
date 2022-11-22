@@ -399,9 +399,9 @@
               <FilePath>..\F2_Orientation_Voilier\Source\Orientation.c</FilePath>
             </File>
             <File>
-              <FileName>RTC.c</FileName>
+              <FileName>AntiChavirement.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
+              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
             </File>
             <File>
               <FileName>Transmission.c</FileName>
@@ -409,9 +409,9 @@
               <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
             </File>
             <File>
-              <FileName>AntiChavirement.c</FileName>
+              <FileName>RTC.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
+              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -864,9 +864,9 @@
               <FilePath>..\F2_Orientation_Voilier\Source\Orientation.c</FilePath>
             </File>
             <File>
-              <FileName>RTC.c</FileName>
+              <FileName>AntiChavirement.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
+              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
             </File>
             <File>
               <FileName>Transmission.c</FileName>
@@ -874,9 +874,9 @@
               <FilePath>..\F4_Transmission\Source\Transmission.c</FilePath>
             </File>
             <File>
-              <FileName>AntiChavirement.c</FileName>
+              <FileName>RTC.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\F3_AntiChavirement\Source\AntiChavirement.c</FilePath>
+              <FilePath>..\F5_RTC\Source\RTC.c</FilePath>
             </File>
           </Files>
         </Group>

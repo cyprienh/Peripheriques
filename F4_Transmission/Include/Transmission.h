@@ -3,6 +3,7 @@
 
 #include "stm32f10x.h"
 
+#define USE_INTERRUPT_TIMER 0		// 0=systick; 1=interrupt
 
 void Transmission_Init(void);
 

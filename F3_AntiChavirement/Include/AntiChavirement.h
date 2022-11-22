@@ -3,7 +3,6 @@
 
 #include "stm32f10x.h"
 
-
 //Utiliser SPI1
 //Adresses des registres à configurer
 #define BW_RATE 		0x2C

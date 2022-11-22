@@ -2,6 +2,7 @@
 
 void (*SysTickHandler) (void) ;
 
+// Enable SysTick & Setup SysTick interrupt every ms
 void SysTick_Init(void (*IT_function)(void)) {
 	int IRQn = SysTick_IRQn;
 	

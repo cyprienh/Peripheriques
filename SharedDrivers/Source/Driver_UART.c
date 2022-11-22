@@ -6,7 +6,7 @@ void UART_Init_TX (USART_TypeDef * USART) {
 	GPIO_Struct_TypeDef GPIO_StructTX;
 	GPIO_StructTX.GPIO_Conf=AltOut_Ppull;
 	
-	if (USART == USART1) {				// Set CLK & Config GPIO TX
+	if (USART == USART1) {					// Set CLK & Config GPIO TX
 		RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
 	} else if (USART == USART2) {
 		GPIO_StructTX.GPIO=GPIOA;
@@ -18,28 +18,28 @@ void UART_Init_TX (USART_TypeDef * USART) {
 		RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
 	}
 	GPIO_Init(&GPIO_StructTX);
-	
-	USART->CR1 |= (0x1 << 13); 		// USART Enable
-	USART->CR1 &= ~(0x1 << 12); 		// Set word length to 8 bits
-	USART->CR2 &= ~(0x3 << 12); 	// 1 Stop bit
-	USART->CR1 &= ~(0x1 << 10);		// Disable parity control
+		
+	USART->CR1 |= USART_CR1_UE;			// USART Enable		
+	USART->CR1 &= ~USART_CR1_M;			// Set word length to 8 bits
+	USART->CR2 &= ~(0x3 << 12); 		// 1 Stop bit
+	USART->CR1 &= ~USART_CR1_PCE;		// Disable parity control
 	//USART->CR1 &= ~(0x1 << 9);		// Set to even parity
 	
 	if (USART == USART1) {
-		USART->BRR = 0x1D4C;				// Set baud rate to 9600	
+		USART->BRR = 0x1D4C;					// Set baud rate to 9600	
 	} else if (USART == USART2 || USART == USART3) {
-		USART->BRR = 0xEA6;					// Set baud rate to 9600	
+		USART->BRR = 0xEA6;						// Set baud rate to 9600	
 	} 
 	
-	USART->CR2 &= ~(0x1 << 11);		// CLK Disable
-	USART->CR1 |= (0x1 << 3); 		// Enable transmitter
+	USART->CR2 &= ~USART_CR2_CLKEN;	// CLK Disable
+	USART->CR1 |= USART_CR1_TE; 		// Enable transmitter
 }
 
 void UART_Init_RX (USART_TypeDef * USART) {
 	GPIO_Struct_TypeDef GPIO_StructRX;
 	GPIO_StructRX.GPIO_Conf=AltOut_Ppull;
 	
-	if (USART == USART1) {				// Set CLK & Config GPIO TX
+	if (USART == USART1) {					// Set CLK & Config GPIO TX
 		RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
 	} else if (USART == USART2) {
 		GPIO_StructRX.GPIO=GPIOA;
@@ -52,20 +52,20 @@ void UART_Init_RX (USART_TypeDef * USART) {
 	}
 	GPIO_Init(&GPIO_StructRX);
 	
-	USART->CR1 |= (0x1 << 13); 		// USART Enable
-	USART->CR1 &= ~(0x1 << 12); 		// Set word length to 8 bits
-	USART->CR2 &= ~(0x3 << 12); 	// 1 Stop bit
-	USART->CR1 &= ~(0x1 << 10);		// Disable parity control
+	USART->CR1 |= USART_CR1_UE;			// USART Enable		
+	USART->CR1 &= ~USART_CR1_M;			// Set word length to 8 bits
+	USART->CR2 &= ~(0x3 << 12); 		// 1 Stop bit
+	USART->CR1 &= ~USART_CR1_PCE;		// Disable parity control
 	//USART->CR1 &= ~(0x1 << 9);		// Set to even parity
 	
 	if (USART == USART1) {
-		USART->BRR = 0x1D4C;				// Set baud rate to 9600	
+		USART->BRR = 0x1D4C;					// Set baud rate to 9600	
 	} else if (USART == USART2 || USART == USART3) {
-		USART->BRR = 0xEA6;					// Set baud rate to 9600	
+		USART->BRR = 0xEA6;						// Set baud rate to 9600	
 	} 
 	
-	USART->CR2 &= ~(0x1 << 11);		// CLK Disable
-	USART->CR1 |= (0x1 << 2); 		// Enable receiver
+	USART->CR2 &= ~USART_CR2_CLKEN;	// CLK Disable
+	USART->CR1 |= USART_CR1_RE; 		// Enable receiver
 }
 
 void UART_Print(USART_TypeDef * USART, char * str) {
@@ -79,7 +79,6 @@ void UART_Print(USART_TypeDef * USART, char * str) {
 }
 
 char UART_ReadChar(USART_TypeDef * USART) {
-	
 	while (((USART->SR >> 5) & 0x1) != 1);
 	return USART->DR;
 }
