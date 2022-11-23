@@ -7,6 +7,7 @@ Les différentes fonctions réalisées sont :
 - F3 - Système anti-chavirement (Maïlis Dy)
 - F4 - Communication avec la télécommande (Emily Holmes)
 - F5 - Real Time Clock (Cyprien Heusse)
+
 Ce projet a été créé sur Keil μVision pour STM32F103.
 
 ## Mapping
