@@ -11,7 +11,7 @@ Les différentes fonctions réalisées sont :
 - F4 - Envoi d’informations sur le système via la télécommande (Emily Holmes)
   - Communication via le module XBee et USART sur la navigation, le chavirement et l’état de la batterie.
 - F5 - Real Time Clock (Cyprien Heusse)
-  - Calcul de l’heure en temps réel pour l’envoyer sur la télécommande.
+  - Lecture de l’heure en temps réel pour l’envoyer sur la télécommande.
 
 L’ensemble du projet est contrôlé à l’aide de Systick qui appelle les fonctions ci-dessus à chaque tick. La fonction F4 est, elle, appelée tous les 3000 ticks, donc la télécommande reçoit des informations tous les 3000 ticks.
 
